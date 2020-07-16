@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "747701213740",
+    "firebase_url": "https://labird.firebaseio.com",
+    "project_id": "labird",
+    "storage_bucket": "labird.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:747701213740:android:f41be740d649b13815cf89",
+        "android_client_info": {
+          "package_name": "com.bima.toharifqi.labird"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "747701213740-ge68nk4mkdputfk4am682f5gi0ldh65m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bima.toharifqi.labird",
+            "certificate_hash": "15ebf9186eaf5b61c7fc4628b55c519778cf2d14"
+          }
+        },
+        {
+          "client_id": "747701213740-6qu6datatf96spdqe4628j1l8jfl0va3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0acalkDZ_z25zDIez-X5iWnkS4sT4r68"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "747701213740-6qu6datatf96spdqe4628j1l8jfl0va3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

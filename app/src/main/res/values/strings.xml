@@ -1,0 +1,65 @@
+<resources>
+    <string name="app_name">La Bird</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Strings for On Boarding Screen -->
+    <!--Titles-->
+    <string name="first_slide_title">Profil LaBird</string>
+    <string name="second_slide_title">Standar Capaian Pembelajaran Mata Kuliah (CPMK)</string>
+    <string name="third_slide_title">Capaian Pembelajaran Mata Kuliah (CPMK)</string>
+    <string name="fourth_slide_title">Sub Capaian Pembelajaran Mata Kuliah (Sub-CPMK)</string>
+    <string name="fifth_slide_title">Indikator Capaian Pembelajaran Dalam Materi</string>
+
+    <!--Descriptions-->
+    <string name="second_slide_desc">Menerapkan konsep biologi untuk merancang penyelidikan dalam
+        bidang lingkungan sebagai usaha
+        memecahkan permasalahan tentang eksplorasi, kemanfaatan dan konservasi lingkungan  dengan
+        menggunakan aplikasi teknologi sehingga dapat memformulasikan solusi dengan benar dan
+        mengambil keputusan secara tepat.</string>
+    <string name="third_slide_desc">1.	Menguasai konsep-konsep dasar ornitology yang terintegrasi  dengan anatomi, fisiologi,
+        dan ekologi burung secara cermat, kritis dan sistematis.\n
+        2.	Mampu menemukan dan menganalisis permasalahan dalam bidang ornitology dan
+        merancang penyelidikan melalui pendekatan ilmiah sehingga diperoleh data yang akurat dan akuntabel.</string>
+    <string name="fourth_slide_desc">1.	Mendeskripsikan karakteristik morfologi, habitat, perikehidupan dan peranan/manfaat burung\n
+        2.	Menjelaskan teknik-teknik mengamati burung di alam/habitatnya\n
+        3.	Melakukan identifikasi spesies burung di alam/habitatnya berdasarkan karakteristik atau
+        ciri morfologi serta suaranya melalui pendekatan literasi burung\n
+        4.	Menganalisis permasalahan dalam bidang ornitology dan merancang penyelidikan melalui
+        literasi burung dan penalaran ilmiah sehingga diperoleh data yang akurat
+        dan akuntabel.</string>
+    <string name="fifth_slide_desc">1.	Mendeskripsikan karakteristik morfologi burung\n
+        2.	Mendeskripsikan habitat burung di alam\n
+        3.	Mendeskripsikan perikehidupan burung di alam\n
+        4.	Mendeskripsikan peranan/manfaat burung di alam\n
+        5.	Menjelaskan teknik-teknik mengamati burung di alam\n
+        6.	Melakukan identifikasi spesies burung di alam/habitatnya berdasarkan karakteristik atau
+        ciri morfologi melalui pendekatan literasi burung dan penalaran ilmiah\n
+        7.	Melakukan identifikasi spesies burung di alam/habitatnya berdasarkan suaranya melalui
+        pendekatan literasi burung dan penalaran ilmiah\n
+        8.	Menganalisis permasalahan dalam bidang ornitology dan merancang penyelidikan melalui
+        literasi burung pendekatan ilmiah/penalaran ilmiah sehingga diperoleh data yang akurat
+        dan akuntabel.</string>
+    <string name="langkah_belajar">Terdapat spesies burung apa saja pada video-video di atas?\nBagaimana morfologi tubuh dan suara masing-masing spesies burung tersebut?
+    </string>
+    <string name="langkah_belajar2">Di atas terdapat <b>empat foto burung</b> dari video sebelumnya. Perhatikan foto-foto tersebut! Berilah keterangan bagian-bagian penanda yang ada sesuai contoh sebelumnya!
+    </string>
+    <string name="first_slide_desc">La-Bird merupakan sebuah media pembelajaran sebagai panduan untuk
+            melakukan pengamatan burung di lapangan pada mata kuliah Ornithologi. Proses
+            pembelajaran yang dilakukan mengikuti sintaks pembelajaran Project Based Learning
+            (PjBL) berdasarkan hasil eksplorasi keanekaragaman spesies burung pada 6 kawasan
+            sumber Mata air di Malang Raya serta dilengkapi dengan muatan literasi burung dan
+            penalaran ilmiah. Hasil eksplorasi keanekaragaman spesies burung pada 6 kawasan
+            sumber Mata air di Malang Raya digunakan untuk belajar dalam meningkatkan
+            keterampilan identifikasi spesies burung serta memberikan informasi keberadaan
+            spesies burung pada lokasi yang telah dieksplorasi sebagai bahan belajar . La-Bird
+            terdiri dari kegiatan pembelajaran yang dilakukan dengan tatap muka secara langsung
+            (offline) maupun secara online.</string>
+
+    <!--Buttons-->
+    <string name="skip_btn">Skip</string>
+    <string name="next_btn">Selanjutnya</string>
+    <string name="let_get_started">Mari Mulai!</string>
+    <string name="course_warning"><b>Catatan</b>: pastikan foto yang anda pilih memiliki resolusi yang jelas untuk dibaca</string>
+</resources>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@drawable/rounded_dialog"
+    android:gravity="center_horizontal"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_marginTop="16dp"
+        android:layout_width="60dp"
+        android:layout_height="10dp"
+        android:background="@drawable/rounded_box_grey"/>
+
+    <ImageView
+        android:id="@+id/scoreCheck"
+        android:layout_marginVertical="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/score_icon"/>
+    <TextView
+        android:layout_marginHorizontal="16dp"
+        android:id="@+id/firstTextDialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Selamat Anda Mendapat"
+        android:gravity="center"
+        android:textAllCaps="true"/>
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/pointTextDialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+50pt"
+        android:textSize="40sp"
+        android:textStyle="bold"/>
+    <TextView
+        android:layout_marginHorizontal="16dp"
+        android:visibility="gone"
+        android:id="@+id/secondTextDialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Jawaban Anda benar"/>
+    <Button
+        android:id="@+id/okButton"
+        android:layout_marginVertical="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/greenbuttonstyle"
+        android:text="mengerti"
+        android:textColor="@color/white"/>
+    <LinearLayout
+        android:id="@+id/doubleButtonLayout"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/resetBtn"
+            android:layout_marginVertical="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" ulangi"
+            android:layout_marginHorizontal="8dp"
+            android:background="@drawable/greenbuttonstyle"
+            android:textColor="@color/white"
+            android:padding="8dp"
+            android:drawableLeft="@drawable/ic_replay_white"/>
+        <Button
+            android:id="@+id/homeBtn"
+            android:layout_marginVertical="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" beranda"
+            android:layout_marginHorizontal="8dp"
+            android:background="@drawable/greenbuttonstyle"
+            android:textColor="@color/white"
+            android:padding="8dp"
+            android:drawableLeft="@drawable/ic_home_white"/>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="60dp"/>
+
+
+</LinearLayout>

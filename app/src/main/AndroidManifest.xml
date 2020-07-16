@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.bima.toharifqi.labird">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".DailyEvaluationActivity"></activity>
+        <activity android:name=".LeaderBoardActivity" />
+        <activity android:name=".QuizActivity2" />
+        <activity android:name=".QuizActivity" />
+        <activity android:name=".AllQuizActivity" />
+        <activity android:name=".EvaluationActivity2" />
+        <activity android:name=".EvaluationActivity" />
+        <activity android:name=".CourseActivity2" />
+        <activity android:name=".VidfullActivity" />
+        <activity android:name=".CourseActivity" />
+        <activity android:name=".ZoomPicActivity" />
+        <activity android:name=".SpesiesActivity" />
+        <activity android:name=".ProfileActivity" />
+        <activity android:name=".AllCourseActivity" />
+        <activity android:name=".AllSpesiesActivity" />
+        <activity android:name=".AllMateriActivity" />
+        <activity android:name=".MateriActivity" />
+        <activity android:name=".BoardingActivity" />
+        <activity android:name=".HomeActivity" />
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
