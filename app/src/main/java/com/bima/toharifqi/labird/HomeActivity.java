@@ -22,6 +22,7 @@ import com.bima.toharifqi.labird.helper.GlobalValueUser;
 import com.bumptech.glide.Glide;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -127,8 +128,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         dataPoin.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String poinValue = String.valueOf(dataSnapshot.child(GlobalValueUser.userName).child("poin").getValue());
-                String levelString = String.valueOf(dataSnapshot.child(GlobalValueUser.userName).child("level").getValue());
+                String poinValue = String.valueOf(dataSnapshot.child(GlobalValueUser.uId).child("poin").getValue());
+                String levelString = String.valueOf(dataSnapshot.child(GlobalValueUser.uId).child("level").getValue());
                 int poinValuePlus = Integer.valueOf(poinValue)*(-1);
                 int levelInteger = Integer.valueOf(levelString);
 
@@ -223,11 +224,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_profile:
                 Intent intent = new Intent(HomeActivity.this, ProfileActivity.class);
                 String poin = poinText.getText().toString();
-                intent.putExtra("username", GlobalValueUser.userName);
                 intent.putExtra("poinText", poin);
                 startActivity(intent);
                 break;
             case R.id.nav_logout:
+                FirebaseAuth.getInstance().signOut();
                 startActivity(new Intent(this, LoginActivity.class));
                 finish();
                 break;

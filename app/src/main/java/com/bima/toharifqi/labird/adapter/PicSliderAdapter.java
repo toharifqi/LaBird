@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -64,19 +65,20 @@ public class PicSliderAdapter extends PagerAdapter {
         //to display loading dialog
         dialog = new SpotsDialog.Builder().setContext(context).build();
         dialog.setMessage("Mohon tunggu...");
-        dialog.show();
+
+        final ProgressBar progressBar = view.findViewById(R.id.progressbar_pic);
+
 
         Glide.with(context).load(picList.get(position)).placeholder(R.drawable.species_placeholder).listener(new RequestListener<Drawable>() {
             @Override
             public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                Toast.makeText(context, "load failed bruh!!!", Toast.LENGTH_SHORT).show();
+                progressBar.setVisibility(View.GONE);
                 return false;
             }
 
             @Override
             public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                dialog.dismiss();
-                Toast.makeText(context, "yeaah, we did it!!", Toast.LENGTH_SHORT).show();
+                progressBar.setVisibility(View.GONE);
                 return false;
             }
         }).into(picImage);

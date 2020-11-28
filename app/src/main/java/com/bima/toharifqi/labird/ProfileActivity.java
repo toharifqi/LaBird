@@ -22,6 +22,7 @@ import com.bima.toharifqi.labird.helper.GlobalValueUser;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -80,9 +81,8 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
         Bundle extras = getIntent().getExtras();
         poin = extras.getString("poinText");
         poinTv.setText(poin);
-        String username = extras.getString("username");
 
-        userRef = FirebaseDatabase.getInstance().getReference("users").child(username);
+        userRef = FirebaseDatabase.getInstance().getReference("users").child(GlobalValueUser.uId);
 
         userRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -156,9 +156,8 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
                 intent.putExtra("poinText", poin);
                 startActivity(intent);
                 break;
-            case R.id.nav_profile:
-                break;
             case R.id.nav_logout:
+                FirebaseAuth.getInstance().signOut();
                 startActivity(new Intent(this, LoginActivity.class));
                 finish();
                 break;

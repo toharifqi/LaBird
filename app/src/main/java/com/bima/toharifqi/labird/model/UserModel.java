@@ -1,56 +1,69 @@
 package com.bima.toharifqi.labird.model;
 
 public class UserModel {
-    private String email, nama, password, userName, waNumber;
+    private String email;
+    private String nama;
+    private String password;
+    private String uId;
+    private String userName;
+    private String waNumber;
 
     public UserModel() {
     }
 
-    public UserModel(String email, String nama, String password, String userName, String waNumber) {
-        this.email = email;
-        this.nama = nama;
-        this.password = password;
-        this.userName = userName;
-        this.waNumber = waNumber;
+    public UserModel(String email2, String nama2, String userName2, String waNumber2, String uId2) {
+        this.email = email2;
+        this.nama = nama2;
+        this.userName = userName2;
+        this.waNumber = waNumber2;
+        this.uId = uId2;
     }
 
     public String getEmail() {
-        return email;
+        return this.email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmail(String email2) {
+        this.email = email2;
     }
 
     public String getNama() {
-        return nama;
+        return this.nama;
     }
 
-    public void setNama(String nama) {
-        this.nama = nama;
+    public void setNama(String nama2) {
+        this.nama = nama2;
     }
 
     public String getPassword() {
-        return password;
+        return this.password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPassword(String password2) {
+        this.password = password2;
     }
 
     public String getUserName() {
-        return userName;
+        return this.userName;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUserName(String userName2) {
+        this.userName = userName2;
     }
 
     public String getWaNumber() {
-        return waNumber;
+        return this.waNumber;
     }
 
-    public void setWaNumber(String waNumber) {
-        this.waNumber = waNumber;
+    public void setWaNumber(String waNumber2) {
+        this.waNumber = waNumber2;
+    }
+
+    public String getuId() {
+        return this.uId;
+    }
+
+    public void setuId(String uId2) {
+        this.uId = uId2;
     }
 }

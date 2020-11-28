@@ -11,18 +11,27 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.bima.toharifqi.labird.model.UserModel;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import dmax.dialog.SpotsDialog;
+import android.app.AlertDialog;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    TextInputLayout nameInput, usernameInput, emailInput, numberInput, passwordInput;
-    DatabaseReference userDb, leaderBoard;
+    AlertDialog dialog;
+    TextInputLayout emailInput, usernameInput, passwordInput, numberInput, nameInput;
+    FirebaseAuth fAuth;
+    DatabaseReference leaderBoard, userDb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +49,10 @@ public class RegisterActivity extends AppCompatActivity {
         leaderBoard = FirebaseDatabase.getInstance().getReference("leaderBoard");
 
 
+        AlertDialog build = new SpotsDialog.Builder().setContext(this).build();
+        dialog = build;
+        build.setMessage("Mohon tunggu...");
+        fAuth = FirebaseAuth.getInstance();
     }
 
     private Boolean validateName() {
@@ -136,29 +149,18 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
 
-        final String name = nameInput.getEditText().getText().toString();
-        final String username = usernameInput.getEditText().getText().toString();
-        String email = emailInput.getEditText().getText().toString();
-        String waNumber = numberInput.getEditText().getText().toString();
-        String password = passwordInput.getEditText().getText().toString();
+        final String email = emailInput.getEditText().getText().toString();
+        final String password = passwordInput.getEditText().getText().toString();
 
-        final UserModel userModel = new UserModel(email, name, password, username, waNumber);
-
-        final String userEnteredUsername = usernameInput.getEditText().getText().toString().trim();
-        Query checkUsername = userDb.orderByChild("userName").equalTo(userEnteredUsername);
-        checkUsername.addValueEventListener(new ValueEventListener() {
+        dialog.show();
+        userDb.orderByChild("userName").equalTo(usernameInput.getEditText().getText().toString().trim()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()){
                     usernameInput.setError("Maaf, username sudah pernah digunakan");
+                    dialog.dismiss();
                 }else {
-                    userDb.child(username).setValue(userModel);
-                    leaderBoard.child(username).child("name").setValue(name);
-                    leaderBoard.child(username).child("level").setValue(1);
-                    leaderBoard.child(username).child("poin").setValue(0);
-                    leaderBoard.child(username).child("username").setValue(username);
-                    Toast.makeText(RegisterActivity.this, "Anda berhasil terdaftar, silahkan login", Toast.LENGTH_LONG).show();
-                    startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                    authenticateUser(email, password);
                 }
             }
 
@@ -167,17 +169,39 @@ public class RegisterActivity extends AppCompatActivity {
 
             }
         });
-
-
-
     }
+
+    private void authenticateUser(String email, String password) {
+        fAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()){
+                    Toast.makeText(RegisterActivity.this, "Anda berhasil terdaftar!", Toast.LENGTH_LONG).show();
+                    onAuthSuccess(task.getResult().getUser());
+                }else {
+                    Toast.makeText(RegisterActivity.this, "Maaf, terjadi kesalahan " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                }
+                dialog.dismiss();
+            }
+        });
+    }
+
+    private void onAuthSuccess(FirebaseUser user) {
+        String name = nameInput.getEditText().getText().toString();
+        String username = usernameInput.getEditText().getText().toString();
+        String email = emailInput.getEditText().getText().toString();
+        userDb.child(user.getUid()).setValue(new UserModel(email, name, username, this.numberInput.getEditText().getText().toString(), user.getUid()));
+        leaderBoard.child(user.getUid()).child("name").setValue(name);
+        leaderBoard.child(user.getUid()).child("level").setValue(1);
+        leaderBoard.child(user.getUid()).child("poin").setValue(0);
+        leaderBoard.child(user.getUid()).child("username").setValue(username);
+        leaderBoard.child(user.getUid()).child("uId").setValue(user.getUid());
+        startActivity(new Intent(this, LoginActivity.class));
+        finish();
+    }
+
 
     public void toLogin(View view){
         onBackPressed();
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
     }
 }

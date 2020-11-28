@@ -58,7 +58,7 @@
             android:id="@+id/username"
             android:hint="Username"
             app:counterMaxLength="15"
-            android:transitionName="username_trans"
+            android:transitionName="email_trans"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
