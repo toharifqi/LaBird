@@ -48,7 +48,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/greenbuttonstyle"
         android:text="mengerti"
-        android:textColor="@color/white"/>
+        android:textColor="@color/colorWhite"/>
     <LinearLayout
         android:id="@+id/doubleButtonLayout"
         android:visibility="gone"
@@ -63,7 +63,7 @@
             android:text=" ulangi"
             android:layout_marginHorizontal="8dp"
             android:background="@drawable/greenbuttonstyle"
-            android:textColor="@color/white"
+            android:textColor="@color/colorWhite"
             android:padding="8dp"
             android:drawableLeft="@drawable/ic_replay_white"/>
         <Button
@@ -74,7 +74,7 @@
             android:text=" beranda"
             android:layout_marginHorizontal="8dp"
             android:background="@drawable/greenbuttonstyle"
-            android:textColor="@color/white"
+            android:textColor="@color/colorWhite"
             android:padding="8dp"
             android:drawableLeft="@drawable/ic_home_white"/>
     </LinearLayout>

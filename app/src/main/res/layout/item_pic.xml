@@ -28,6 +28,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
+            android:indeterminateTint="@color/brown"
+            android:indeterminateTintMode="src_in"
             android:layout_margin="20dp" />
     </RelativeLayout>
 

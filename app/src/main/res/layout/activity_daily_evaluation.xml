@@ -102,7 +102,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Evaluasi Harian"
-                            android:textColor="@color/white"
+                            android:textColor="@color/colorWhite"
                             android:textSize="18sp"
                             android:textStyle="bold" />
                         <TextView
@@ -110,7 +110,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="12-12-2020"
-                            android:textColor="@color/white"
+                            android:textColor="@color/colorWhite"
                             android:textStyle="italic"
                             android:textSize="16sp" />
                     </LinearLayout>
@@ -233,7 +233,7 @@
                     android:layout_height="wrap_content"
                     android:text="Kumpulkan"
                     android:background="@drawable/greenbuttonstyle"
-                    android:textColor="@color/white"
+                    android:textColor="@color/colorWhite"
                     android:padding="8dp"
                     android:onClick="submitAnswer"
                     android:drawableRight="@drawable/ic_keyboard_arrow_right_white"/>

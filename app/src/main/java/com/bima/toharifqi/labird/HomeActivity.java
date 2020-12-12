@@ -6,43 +6,68 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SnapHelper;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bima.toharifqi.labird.helper.GlobalValue;
+import com.bima.toharifqi.labird.adapter.CourseSnapAdapter;
+import com.bima.toharifqi.labird.adapter.MateriSnapAdapter;
+import com.bima.toharifqi.labird.adapter.QuizSnapAdapter;
+import com.bima.toharifqi.labird.adapter.SpesiesSnapAdapter;
 import com.bima.toharifqi.labird.helper.GlobalValueUser;
+import com.bima.toharifqi.labird.listener.IFirebaseLoadDoneCourse;
+import com.bima.toharifqi.labird.listener.IFirebaseLoadDoneMateri;
+import com.bima.toharifqi.labird.listener.IFirebaseLoadDoneQuiz;
+import com.bima.toharifqi.labird.listener.IFirebaseLoadDoneSpesies;
+import com.bima.toharifqi.labird.model.CourseModel;
+import com.bima.toharifqi.labird.model.MateriModel;
+import com.bima.toharifqi.labird.model.QuizModel;
+import com.bima.toharifqi.labird.model.SpesiesModel;
 import com.bumptech.glide.Glide;
+import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
-public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, IFirebaseLoadDoneMateri, IFirebaseLoadDoneSpesies, IFirebaseLoadDoneCourse, IFirebaseLoadDoneQuiz {
 
-    Toolbar toolbar;
-    String nameFromDB, usernameFromDB, phoneNoFromDB, emailFromDB;
-    ImageView menuIcon, dashboardBg;
-    CoordinatorLayout contentView;
+    private Toolbar toolbar;
+    private String nameFromDB, usernameFromDB, phoneNoFromDB, emailFromDB;
+    private ImageView menuIcon, dashboardBg;
+    private CoordinatorLayout contentView;
     TextView poinText;
+    FloatingActionButton fab;
+    RecyclerView recyclerViewMateri, recyclerViewSpesies, recyclerViewCourse, recyclerViewQuiz;
+    SnapHelper snapHelper;
+    private LinearLayout shimmerMateri, shimmerSpesies, shimmerCourse, shimmerQuiz;
 
     //Drawer menu
     DrawerLayout drawerLayout;
@@ -51,8 +76,81 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     //constant
     static final float END_SCALE =  0.7f;
 
+    //loading data from firebase
     DatabaseReference dataPoin;
+    Query queryMateri, querySpesies, queryCourse, queryQuiz;
+    IFirebaseLoadDoneMateri iFirebaseLoadDoneMateri;
+    IFirebaseLoadDoneSpesies iFirebaseLoadDoneSpesies;
+    IFirebaseLoadDoneCourse iFirebaseLoadDoneCourse;
+    IFirebaseLoadDoneQuiz iFirebaseLoadDoneQuiz;
 
+    //adapters
+    private MateriSnapAdapter materiAdapter;
+    private SpesiesSnapAdapter spesiesAdapter;
+    private CourseSnapAdapter courseAdapter;
+    private QuizSnapAdapter quizAdapter;
+
+    //value listeners
+    ValueEventListener valueEventListenerMateri = new ValueEventListener() {
+        @Override
+        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            ArrayList<MateriModel> materiList = new ArrayList<>();
+            for (DataSnapshot materiSnapshot:dataSnapshot.getChildren())
+                materiList.add(materiSnapshot.getValue(MateriModel.class));
+            iFirebaseLoadDoneMateri.onFirebaseLoadSuccessMateri(materiList);
+        }
+
+        @Override
+        public void onCancelled(@NonNull DatabaseError databaseError) {
+            iFirebaseLoadDoneMateri.onFirebaseLoadFailedMateri(databaseError.getMessage());
+        }
+    };
+
+    ValueEventListener valueEventListenerSpesies = new ValueEventListener() {
+        @Override
+        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            List<SpesiesModel> spesiesList = new ArrayList<>();
+            for (DataSnapshot spesiesSnapshot:dataSnapshot.getChildren()){
+                spesiesList.add(spesiesSnapshot.getValue(SpesiesModel.class));
+            }
+            iFirebaseLoadDoneSpesies.onFirebaseLoadSuccessSpesies(spesiesList);
+        }
+
+        @Override
+        public void onCancelled(@NonNull DatabaseError databaseError) {
+            iFirebaseLoadDoneSpesies.onFirebaseLoadFailedSpesies(databaseError.getMessage());
+        }
+    };
+
+    ValueEventListener valueEventListenerCourse = new ValueEventListener() {
+        @Override
+        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            List <CourseModel> courseList = new ArrayList<>();
+            for (DataSnapshot courseSnapshot:dataSnapshot.getChildren())
+                courseList.add(courseSnapshot.getValue(CourseModel.class));
+            iFirebaseLoadDoneCourse.onFirebaseLoadSuccessCourse(courseList);
+        }
+
+        @Override
+        public void onCancelled(@NonNull DatabaseError databaseError) {
+            iFirebaseLoadDoneCourse.onFirebaseLoadFailedCourse(databaseError.getMessage());
+        }
+    };
+
+    ValueEventListener valueEventListenerQuiz = new ValueEventListener() {
+        @Override
+        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            List<QuizModel> quizList = new ArrayList<>();
+            for (DataSnapshot quizSnapshot:dataSnapshot.getChildren())
+                quizList.add(quizSnapshot.getValue(QuizModel.class));
+            iFirebaseLoadDoneQuiz.onFirebaseLoadSuccessQuiz(quizList);
+        }
+
+        @Override
+        public void onCancelled(@NonNull DatabaseError databaseError) {
+            iFirebaseLoadDoneQuiz.onFirebaseLoadFailedQuiz(databaseError.getMessage());
+        }
+    };
 
 
     @Override
@@ -114,6 +212,15 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         poinText = findViewById(R.id.pointText);
         final TextView levelText = findViewById(R.id.levelText);
         final TextView targetPoinText = findViewById(R.id.target_poin);
+        fab = findViewById(R.id.fab);
+        recyclerViewMateri = findViewById(R.id.recyclerview_materi);
+        recyclerViewSpesies = findViewById(R.id.recyclerview_spesies);
+        recyclerViewCourse = findViewById(R.id.recyclerview_course);
+        recyclerViewQuiz = findViewById(R.id.recyclerview_quiz);
+        shimmerMateri = findViewById(R.id.shimmer_materi);
+        shimmerSpesies = findViewById(R.id.shimmer_spesies);
+        shimmerCourse = findViewById(R.id.shimmer_course);
+        shimmerQuiz = findViewById(R.id.shimmer_quiz);
 
         menuIcon = findViewById(R.id.menu_icon);
         contentView = findViewById(R.id.contentView);
@@ -154,10 +261,52 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.navigation_view);
 
-
-
         navigationDrawer();
 
+        //loading data from firebase
+        queryMateri = FirebaseDatabase.getInstance().getReference("materi").orderByKey();
+        querySpesies = FirebaseDatabase.getInstance().getReference("spesies").orderByKey();
+        queryCourse = FirebaseDatabase.getInstance().getReference("course");
+        queryQuiz = FirebaseDatabase.getInstance().getReference("quiz").orderByChild("order");
+        iFirebaseLoadDoneMateri = this;
+        iFirebaseLoadDoneSpesies = this;
+        iFirebaseLoadDoneCourse = this;
+        iFirebaseLoadDoneQuiz = this;
+        loadMateri();
+        loadSpesies();
+        loadCourse();
+        loadQuiz();
+
+        snapHelper = new GravitySnapHelper(Gravity.START);
+        snapHelper.attachToRecyclerView(recyclerViewMateri);
+        snapHelper.attachToRecyclerView(recyclerViewSpesies);
+        snapHelper.attachToRecyclerView(recyclerViewCourse);
+        snapHelper.attachToRecyclerView(recyclerViewQuiz);
+        recyclerViewMateri.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        recyclerViewSpesies.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        recyclerViewCourse.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        recyclerViewQuiz.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        recyclerViewMateri.setHasFixedSize(true);
+        recyclerViewSpesies.setHasFixedSize(true);
+        recyclerViewCourse.setHasFixedSize(true);
+        recyclerViewQuiz.setHasFixedSize(true);
+
+    }
+
+    private void loadQuiz() {
+        queryQuiz.addValueEventListener(valueEventListenerQuiz);
+    }
+
+    private void loadCourse() {
+        queryCourse.addValueEventListener(valueEventListenerCourse);
+    }
+
+    private void loadSpesies() {
+        querySpesies.addValueEventListener(valueEventListenerSpesies);
+    }
+
+    private void loadMateri() {
+        queryMateri.addValueEventListener(valueEventListenerMateri);
     }
 
     private void navigationDrawer() {
@@ -258,4 +407,82 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         startActivity(new Intent(HomeActivity.this, DailyEvaluationActivity.class));
     }
 
+    public void toAddBird(View view){
+        startActivity(new Intent(HomeActivity.this, AddBirdActivity.class));
+    }
+
+    @Override
+    public void onDestroy() {
+        queryMateri.removeEventListener(valueEventListenerMateri);
+        querySpesies.removeEventListener(valueEventListenerSpesies);
+        queryCourse.removeEventListener(valueEventListenerCourse);
+        queryQuiz.removeEventListener(valueEventListenerQuiz);
+        super.onDestroy();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    public void onStop() {
+        queryMateri.removeEventListener(valueEventListenerMateri);
+        querySpesies.removeEventListener(valueEventListenerSpesies);
+        queryCourse.removeEventListener(valueEventListenerCourse);
+        queryQuiz.removeEventListener(valueEventListenerQuiz);
+        super.onStop();
+    }
+
+    @Override
+    public void onFirebaseLoadSuccessMateri(ArrayList<MateriModel> materiList) {
+        materiAdapter = new MateriSnapAdapter(materiList, HomeActivity.this);
+        recyclerViewMateri.setAdapter(materiAdapter);
+        shimmerMateri.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onFirebaseLoadFailedMateri(String message) {
+        Toast.makeText(HomeActivity.this, ""+message, Toast.LENGTH_SHORT).show();
+        shimmerMateri.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onFirebaseLoadSuccessSpesies(List<SpesiesModel> spesiesList) {
+        spesiesAdapter = new SpesiesSnapAdapter(spesiesList, HomeActivity.this);
+        recyclerViewSpesies.setAdapter(spesiesAdapter);
+        shimmerSpesies.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onFirebaseLoadFailedSpesies(String message) {
+        Toast.makeText(HomeActivity.this, ""+message, Toast.LENGTH_SHORT).show();
+        shimmerSpesies.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onFirebaseLoadSuccessCourse(List<CourseModel> courseList) {
+        courseAdapter = new CourseSnapAdapter(courseList, HomeActivity.this);
+        recyclerViewCourse.setAdapter(courseAdapter);
+        shimmerCourse.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onFirebaseLoadFailedCourse(String message) {
+        Toast.makeText(HomeActivity.this, ""+message, Toast.LENGTH_SHORT).show();
+        shimmerCourse.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onFirebaseLoadSuccessQuiz(List<QuizModel> quizList) {
+        quizAdapter = new QuizSnapAdapter(quizList, HomeActivity.this);
+        recyclerViewQuiz.setAdapter(quizAdapter);
+        shimmerQuiz.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onFirebaseLoadFailedQuiz(String message) {
+        Toast.makeText(HomeActivity.this, ""+message, Toast.LENGTH_SHORT).show();
+        shimmerQuiz.setVisibility(View.GONE);
+    }
 }

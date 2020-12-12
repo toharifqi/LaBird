@@ -1,16 +1,19 @@
 package com.bima.toharifqi.labird;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,6 +21,10 @@ import android.widget.Toast;
 import com.bima.toharifqi.labird.R;
 import com.bima.toharifqi.labird.model.QuizModel;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -37,6 +44,7 @@ public class QuizActivity extends AppCompatActivity {
     RadioGroup rg1, rg2;
     QuizModel quizModelExtra;
     private int poinPerSoal, poin;
+    private ProgressBar progressBar;
 
     DatabaseReference daftarSoal;
 
@@ -136,6 +144,8 @@ public class QuizActivity extends AppCompatActivity {
         //select soundUrl based on what page now is
         selectUrl(numSoalPage);
 
+        progressBar = findViewById(R.id.progressbar_pic);
+
     }
 
     //untuk mengatur 2 radiogroup as one radiogroup
@@ -198,7 +208,19 @@ public class QuizActivity extends AppCompatActivity {
                 String jawabFString = String.valueOf(dataSnapshot.child(String.valueOf(Case)).child("jawabF").getValue());
 
                 //set data for every dinamic view
-                Glide.with(QuizActivity.this).load(picUrl).into(soalPic);
+                Glide.with(QuizActivity.this).load(picUrl).placeholder(R.drawable.species_placeholder).listener(new RequestListener<Drawable>() {
+                    @Override
+                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                        progressBar.setVisibility(View.GONE);
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                        progressBar.setVisibility(View.GONE);
+                        return false;
+                    }
+                }).into(soalPic);
                 jawabA.setText(jawabAString);
                 jawabB.setText(jawabBString);
                 jawabC.setText(jawabCString);

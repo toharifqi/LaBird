@@ -2,14 +2,13 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
+    android:layout_width="280dp"
     android:layout_height="wrap_content"
     android:clickable="true"
     android:focusable="true"
     android:foreground="?android:attr/selectableItemBackground"
-    android:layout_gravity="center"
-    android:layout_margin="0dp"
     app:cardCornerRadius="8dp"
+    android:id="@+id/cardview_spesies"
     app:cardUseCompatPadding="true">
     <RelativeLayout
         android:layout_width="match_parent"
@@ -72,7 +71,7 @@
                 android:text="Tantangan Manajemen Agribisnis"
                 android:ellipsize="end"
                 android:maxLines="2"
-                android:textColor="@color/white"
+                android:textColor="@color/colorWhite"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -83,8 +82,16 @@
                 android:layout_height="wrap_content"
                 android:text="Muhammad Ashar"
                 android:textStyle="italic"
-                android:textColor="@color/white"/>
+                android:textColor="@color/colorWhite"/>
         </LinearLayout>
+        <ProgressBar
+            android:id="@+id/progressbar_pic"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:indeterminateTint="@color/brown"
+            android:indeterminateTintMode="src_in"
+            android:layout_margin="20dp" />
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

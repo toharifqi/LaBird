@@ -37,12 +37,12 @@ public class AllQuizActivity extends AppCompatActivity implements IFirebaseLoadD
             List<QuizModel> quizList = new ArrayList<>();
             for (DataSnapshot quizSnapshot:dataSnapshot.getChildren())
                 quizList.add(quizSnapshot.getValue(QuizModel.class));
-            iFirebaseLoadDone.onFirebaseLoadSuccess(quizList);
+            iFirebaseLoadDone.onFirebaseLoadSuccessQuiz(quizList);
         }
 
         @Override
         public void onCancelled(@NonNull DatabaseError databaseError) {
-            iFirebaseLoadDone.onFirebaseLoadFailed(databaseError.getMessage());
+            iFirebaseLoadDone.onFirebaseLoadFailedQuiz(databaseError.getMessage());
         }
     };
 
@@ -87,14 +87,14 @@ public class AllQuizActivity extends AppCompatActivity implements IFirebaseLoadD
     }
 
     @Override
-    public void onFirebaseLoadSuccess(List<QuizModel> quizList) {
+    public void onFirebaseLoadSuccessQuiz(List<QuizModel> quizList) {
         quizGridAdapter = new QuizGridAdapter(AllQuizActivity.this, quizList);
         quizRecyclerView.setAdapter(quizGridAdapter);
         dialog.dismiss();
     }
 
     @Override
-    public void onFirebaseLoadFailed(String message) {
+    public void onFirebaseLoadFailedQuiz(String message) {
         Toast.makeText(AllQuizActivity.this, ""+message, Toast.LENGTH_SHORT).show();
         dialog.dismiss();
     }

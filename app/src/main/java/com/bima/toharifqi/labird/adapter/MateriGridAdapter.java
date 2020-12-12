@@ -44,7 +44,7 @@ public class MateriGridAdapter extends RecyclerView.Adapter<MateriGridAdapter.My
         holder.materiTitle.setText(materiList.get(position).getMateriTitle());
         holder.materiAuthor.setText(materiList.get(position).getMateriAuthor());
         Glide.with(context).load(materiList.get(position).getMateriImage()).into(holder.materiImage);
-        holder.cardView.setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, MateriActivity.class);
@@ -64,7 +64,6 @@ public class MateriGridAdapter extends RecyclerView.Adapter<MateriGridAdapter.My
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView materiTitle, materiAuthor;
         ImageView materiImage;
-        CardView cardView;
 
 
         public MyViewHolder(@NonNull View itemView) {
@@ -73,7 +72,6 @@ public class MateriGridAdapter extends RecyclerView.Adapter<MateriGridAdapter.My
             materiTitle = itemView.findViewById(R.id.materiTitle);
             materiAuthor = itemView.findViewById(R.id.materiAuthor);
             materiImage = itemView.findViewById(R.id.materiImage);
-            cardView = itemView.findViewById(R.id.materi_cardview);
         }
     }
 }

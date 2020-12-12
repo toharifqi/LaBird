@@ -12,7 +12,7 @@
 
     <style name="navigationTheme">
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="android:colorControlHighlight">@color/white</item>
+        <item name="android:colorControlHighlight">@color/colorWhite</item>
 
     </style>
 </resources>

@@ -4,5 +4,11 @@
     <color name="colorPrimaryDark">#6EB22B</color>
     <color name="colorAccent">#8FC551</color>
     <color name="brown">#E1760C</color>
-    <color name="white">#FFFFFF</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorGrey">#646464</color>
+    <color name="colorGreyShimmerSolid">#D1D1D1</color>
+    <color name="colorDarkGrey">#494949</color>
+    <color name="colorGreyLight">#F0F0F0</color>
+    <color name="colorGreyShimmer">#569C9C9C</color>
+
 </resources>

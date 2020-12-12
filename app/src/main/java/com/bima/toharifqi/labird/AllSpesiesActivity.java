@@ -39,12 +39,12 @@ public class AllSpesiesActivity extends AppCompatActivity implements IFirebaseLo
             List<SpesiesModel> spesiesList = new ArrayList<>();
             for (DataSnapshot spesiesSnapshot:dataSnapshot.getChildren())
                 spesiesList.add(spesiesSnapshot.getValue(SpesiesModel.class));
-            iFirebaseLoadDone.onFirebaseLoadSuccess(spesiesList);
+            iFirebaseLoadDone.onFirebaseLoadSuccessSpesies(spesiesList);
         }
 
         @Override
         public void onCancelled(@NonNull DatabaseError databaseError) {
-            iFirebaseLoadDone.onFirebaseLoadFailed(databaseError.getMessage());
+            iFirebaseLoadDone.onFirebaseLoadFailedSpesies(databaseError.getMessage());
         }
     };
 
@@ -119,14 +119,14 @@ public class AllSpesiesActivity extends AppCompatActivity implements IFirebaseLo
     }
 
     @Override
-    public void onFirebaseLoadSuccess(List<SpesiesModel> spesiesList) {
+    public void onFirebaseLoadSuccessSpesies(List<SpesiesModel> spesiesList) {
         speciesGridAdapter = new SpeciesGridAdapter(AllSpesiesActivity.this, spesiesList);
         spesiesRecyclerView.setAdapter(speciesGridAdapter);
         dialog.dismiss();
     }
 
     @Override
-    public void onFirebaseLoadFailed(String message) {
+    public void onFirebaseLoadFailedSpesies(String message) {
         Toast.makeText(AllSpesiesActivity.this, ""+message, Toast.LENGTH_SHORT).show();
         dialog.dismiss();
     }

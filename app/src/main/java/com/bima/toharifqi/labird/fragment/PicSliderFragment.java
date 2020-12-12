@@ -11,13 +11,12 @@ import androidx.viewpager.widget.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bima.toharifqi.labird.R;
 import com.bima.toharifqi.labird.adapter.PicSliderAdapter;
 import com.bima.toharifqi.labird.helper.GlobalValue;
-import com.bima.toharifqi.labird.listener.DepthPageTransformer;
+import com.bima.toharifqi.labird.helper.DepthPageTransformer;
 import com.bima.toharifqi.labird.listener.IFirebaseLoadDonePic;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;

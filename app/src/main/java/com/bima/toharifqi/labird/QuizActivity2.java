@@ -96,8 +96,8 @@ public class QuizActivity2 extends AppCompatActivity implements MediaPlayer.OnBu
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 //userPoin = String.valueOf(dataSnapshot.child(GlobalValueUser.userName).child("poin").getValue());
-                String poinText = String.valueOf(dataSnapshot.child(GlobalValueUser.userName).child("poin").getValue());
-                String levelText = String.valueOf(dataSnapshot.child(GlobalValueUser.userName).child("level").getValue());
+                String poinText = String.valueOf(dataSnapshot.child(GlobalValueUser.uId).child("poin").getValue());
+                String levelText = String.valueOf(dataSnapshot.child(GlobalValueUser.uId).child("level").getValue());
 
                 int levelInteger = Integer.valueOf(levelText);
                 targetPoin = 20+(10*(levelInteger*levelInteger));
@@ -337,11 +337,11 @@ public class QuizActivity2 extends AppCompatActivity implements MediaPlayer.OnBu
 
 
                 if (currentPoin*-1>targetPoin){
-                    dataUser.child(GlobalValueUser.userName).child("level").setValue(userLevel+1);
+                    dataUser.child(GlobalValueUser.uId).child("level").setValue(userLevel+1);
                 }
 
 
-                dataUser.child(GlobalValueUser.userName).child("poin").setValue(currentPoin);
+                dataUser.child(GlobalValueUser.uId).child("poin").setValue(currentPoin);
 
 
             }

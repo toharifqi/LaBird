@@ -30,7 +30,7 @@
             android:background="@color/colorPrimary"
             android:gravity="center"
             android:text="Spesies Name"
-            android:textColor="@color/white"
+            android:textColor="@color/colorWhite"
             android:textSize="14sp" />
 
     </LinearLayout>

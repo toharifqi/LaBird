@@ -35,15 +35,15 @@ public class AllMateriActivity extends AppCompatActivity implements IFirebaseLoa
     ValueEventListener valueEventListener = new ValueEventListener() {
         @Override
         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-            List<MateriModel> materiList = new ArrayList<>();
+            ArrayList<MateriModel> materiList = new ArrayList<>();
             for (DataSnapshot materiSnapshot:dataSnapshot.getChildren())
                 materiList.add(materiSnapshot.getValue(MateriModel.class));
-            iFirebaseLoadDone.onFirebaseLoadMateriSuccess(materiList);
+            iFirebaseLoadDone.onFirebaseLoadSuccessMateri(materiList);
         }
 
         @Override
         public void onCancelled(@NonNull DatabaseError databaseError) {
-            iFirebaseLoadDone.onFirebaseLoadMateriFailed(databaseError.getMessage());
+            iFirebaseLoadDone.onFirebaseLoadFailedMateri(databaseError.getMessage());
         }
     };
 
@@ -88,14 +88,14 @@ public class AllMateriActivity extends AppCompatActivity implements IFirebaseLoa
     }
 
     @Override
-    public void onFirebaseLoadMateriSuccess(List<MateriModel> materiList) {
+    public void onFirebaseLoadSuccessMateri(ArrayList<MateriModel> materiList) {
         materiGridAdapter = new MateriGridAdapter(AllMateriActivity.this, materiList);
         materiRecyclerView.setAdapter(materiGridAdapter);
         dialog.dismiss();
     }
 
     @Override
-    public void onFirebaseLoadMateriFailed(String message) {
+    public void onFirebaseLoadFailedMateri(String message) {
         Toast.makeText(AllMateriActivity.this, ""+message, Toast.LENGTH_SHORT).show();
         dialog.dismiss();
     }

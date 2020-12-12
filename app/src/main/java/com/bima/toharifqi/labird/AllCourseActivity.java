@@ -39,12 +39,12 @@ public class AllCourseActivity extends AppCompatActivity implements IFirebaseLoa
             List<CourseModel> courseList = new ArrayList<>();
             for (DataSnapshot courseSnapshot:dataSnapshot.getChildren())
                 courseList.add(courseSnapshot.getValue(CourseModel.class));
-            iFirebaseLoadDone.onFirebaseLoadSuccess(courseList);
+            iFirebaseLoadDone.onFirebaseLoadSuccessCourse(courseList);
         }
 
         @Override
         public void onCancelled(@NonNull DatabaseError databaseError) {
-            iFirebaseLoadDone.onFirebaseLoadFailed(databaseError.getMessage());
+            iFirebaseLoadDone.onFirebaseLoadFailedCourse(databaseError.getMessage());
         }
     };
 
@@ -90,14 +90,14 @@ public class AllCourseActivity extends AppCompatActivity implements IFirebaseLoa
     }
 
     @Override
-    public void onFirebaseLoadSuccess(List<CourseModel> courseList) {
+    public void onFirebaseLoadSuccessCourse(List<CourseModel> courseList) {
         courseGridAdapter = new CourseGridAdapter(AllCourseActivity.this, courseList);
         courseRecyclerView.setAdapter(courseGridAdapter);
         dialog.dismiss();
     }
 
     @Override
-    public void onFirebaseLoadFailed(String message) {
+    public void onFirebaseLoadFailedCourse(String message) {
         Toast.makeText(AllCourseActivity.this, ""+message, Toast.LENGTH_SHORT).show();
         dialog.dismiss();
     }

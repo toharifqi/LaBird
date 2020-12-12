@@ -86,7 +86,7 @@
                 android:layout_gravity="center"
                 android:text=" soal"
                 android:background="@drawable/buttonstyle"
-                android:textColor="@color/white"
+                android:textColor="@color/colorWhite"
                 android:padding="8dp"
                 android:drawableLeft="@drawable/ic_volume"/>
 
@@ -115,14 +115,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Section 1: Introduction and Outline"
-                            android:textColor="@color/white"
+                            android:textColor="@color/colorWhite"
                             android:textSize="18sp"
                             android:textStyle="bold" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Evaluasi 1: Mengenal burung melalui kicauan"
-                            android:textColor="@color/white"
+                            android:textColor="@color/colorWhite"
                             android:textStyle="italic"
                             android:textSize="16sp" />
                     </LinearLayout>
@@ -244,7 +244,7 @@
                     android:text="jawab "
                     android:onClick="nextSoal"
                     android:background="@drawable/greenbuttonstyle"
-                    android:textColor="@color/white"
+                    android:textColor="@color/colorWhite"
                     android:padding="8dp"
                     android:drawableRight="@drawable/ic_keyboard_arrow_right_white"/>
 
