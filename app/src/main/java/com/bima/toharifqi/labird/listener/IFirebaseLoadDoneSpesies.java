@@ -4,7 +4,6 @@ import com.bima.toharifqi.labird.model.SpesiesModel;
 
 import java.util.List;
 
-public interface IFirebaseLoadDoneSpesies {
+public interface IFirebaseLoadDoneSpesies extends IFirebaseLoadDone{
     void onFirebaseLoadSuccessSpesies(List<SpesiesModel> spesiesList);
-    void onFirebaseLoadFailedSpesies(String message);
 }

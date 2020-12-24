@@ -15,6 +15,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bima.toharifqi.labird.adapter.SliderAdapter;
+import com.bima.toharifqi.labird.helper.GlobalValue;
+import com.bima.toharifqi.labird.helper.GlobalValueUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class BoardingActivity extends AppCompatActivity {
 
@@ -42,6 +46,14 @@ public class BoardingActivity extends AppCompatActivity {
 
         addDots(0);
         viewPager.addOnPageChangeListener(changeListener);
+
+
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
     }
 
     private void addDots(int position){
@@ -87,6 +99,8 @@ public class BoardingActivity extends AppCompatActivity {
     };
 
     public void skip(View v){
+        DatabaseReference userDb = FirebaseDatabase.getInstance().getReference("users").child(GlobalValueUser.uId);
+        userDb.child("firstTime").setValue(1);
         Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
         startActivity(intent);
         finish();
@@ -97,6 +111,8 @@ public class BoardingActivity extends AppCompatActivity {
     }
 
     public void toHome(View v){
+        DatabaseReference userDb = FirebaseDatabase.getInstance().getReference("users").child(GlobalValueUser.uId);
+        userDb.child("firstTime").setValue(1);
         Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
         startActivity(intent);
         finish();

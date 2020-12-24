@@ -4,27 +4,37 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class SpesiesModel implements Parcelable {
-    private String spesiesName, spesiesLatin, spesiesDescription, spesiesImage, spesiesSound, spesiesId;
+    private String spesiesName, spesiesLatin, spesiesImage, spesiesSound, spesiesId, uploadedBy, sDescText, sSoundText, sDistributionText, sHabitText, sFoundedText;
 
     public SpesiesModel() {
     }
 
-    public SpesiesModel(String spesiesName, String spesiesLatin, String spesiesDescription, String spesiesImage, String spesiesSound, String spesiesId) {
+    public SpesiesModel(String spesiesName, String spesiesLatin, String spesiesImage, String spesiesSound, String spesiesId, String uploadedBy, String sDescText, String sSoundText, String sDistributionText, String sHabitText, String sFoundedText) {
         this.spesiesName = spesiesName;
         this.spesiesLatin = spesiesLatin;
-        this.spesiesDescription = spesiesDescription;
         this.spesiesImage = spesiesImage;
         this.spesiesSound = spesiesSound;
         this.spesiesId = spesiesId;
+        this.uploadedBy = uploadedBy;
+        this.sDescText = sDescText;
+        this.sSoundText = sSoundText;
+        this.sDistributionText = sDistributionText;
+        this.sHabitText = sHabitText;
+        this.sFoundedText = sFoundedText;
     }
 
     protected SpesiesModel(Parcel in) {
         spesiesName = in.readString();
         spesiesLatin = in.readString();
-        spesiesDescription = in.readString();
         spesiesImage = in.readString();
         spesiesSound = in.readString();
         spesiesId = in.readString();
+        uploadedBy = in.readString();
+        sDescText = in.readString();
+        sSoundText = in.readString();
+        sDistributionText = in.readString();
+        sHabitText = in.readString();
+        sFoundedText = in.readString();
     }
 
     public static final Creator<SpesiesModel> CREATOR = new Creator<SpesiesModel>() {
@@ -43,48 +53,44 @@ public class SpesiesModel implements Parcelable {
         return spesiesName;
     }
 
-    public void setSpesiesName(String spesiesName) {
-        this.spesiesName = spesiesName;
-    }
-
     public String getSpesiesLatin() {
         return spesiesLatin;
-    }
-
-    public void setSpesiesLatin(String spesiesLatin) {
-        this.spesiesLatin = spesiesLatin;
-    }
-
-    public String getSpesiesDescription() {
-        return spesiesDescription;
-    }
-
-    public void setSpesiesDescription(String spesiesDescription) {
-        this.spesiesDescription = spesiesDescription;
     }
 
     public String getSpesiesImage() {
         return spesiesImage;
     }
 
-    public void setSpesiesImage(String spesiesImage) {
-        this.spesiesImage = spesiesImage;
-    }
-
     public String getSpesiesSound() {
         return spesiesSound;
-    }
-
-    public void setSpesiesSound(String spesiesSound) {
-        this.spesiesSound = spesiesSound;
     }
 
     public String getSpesiesId() {
         return spesiesId;
     }
 
-    public void setSpesiesId(String spesiesId) {
-        this.spesiesId = spesiesId;
+    public String getUploadedBy() {
+        return uploadedBy;
+    }
+
+    public String getsDescText() {
+        return sDescText;
+    }
+
+    public String getsSoundText() {
+        return sSoundText;
+    }
+
+    public String getsDistributionText() {
+        return sDistributionText;
+    }
+
+    public String getsHabitText() {
+        return sHabitText;
+    }
+
+    public String getsFoundedText() {
+        return sFoundedText;
     }
 
     @Override
@@ -96,9 +102,14 @@ public class SpesiesModel implements Parcelable {
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(spesiesName);
         parcel.writeString(spesiesLatin);
-        parcel.writeString(spesiesDescription);
         parcel.writeString(spesiesImage);
         parcel.writeString(spesiesSound);
         parcel.writeString(spesiesId);
+        parcel.writeString(uploadedBy);
+        parcel.writeString(sDescText);
+        parcel.writeString(sSoundText);
+        parcel.writeString(sDistributionText);
+        parcel.writeString(sHabitText);
+        parcel.writeString(sFoundedText);
     }
 }

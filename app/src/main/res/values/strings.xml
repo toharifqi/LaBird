@@ -62,4 +62,5 @@
     <string name="next_btn">Selanjutnya</string>
     <string name="let_get_started">Mari Mulai!</string>
     <string name="course_warning"><b>Catatan</b>: pastikan foto yang anda pilih memiliki resolusi yang jelas untuk dibaca</string>
+    <string name="addbird_desclaimer">Upload foto dari dokumen atau ambil langsung dengan kamera ponsel anda. <b>Beberapa kamera memiliki resolusi yang terlalu tinggi sehingga kemungkinan gambar anda tidak akan termuat, ambil dari folder sebagai gantinya!</b></string>
 </resources>

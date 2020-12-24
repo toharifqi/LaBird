@@ -23,7 +23,7 @@ import java.util.concurrent.TimeUnit;
 import dmax.dialog.SpotsDialog;
 
 public class SpesiesActivity extends AppCompatActivity implements MediaPlayer.OnBufferingUpdateListener, MediaPlayer.OnCompletionListener {
-    private TextView spesiesName, spesiesLatin, spesiesDescription;
+    private TextView spesiesName, spesiesLatin, sDescText, sSoundText, sDistributionText, sHabitText, sFoundedText;
 
     Toolbar toolbar;
 
@@ -60,12 +60,20 @@ public class SpesiesActivity extends AppCompatActivity implements MediaPlayer.On
         //tipycal views
         spesiesName = findViewById(R.id.spesiesName);
         spesiesLatin = findViewById(R.id.spesiesLatin);
-        spesiesDescription = findViewById(R.id.spesiesDescription);
+        sDescText = findViewById(R.id.spesies_desc);
+        sSoundText = findViewById(R.id.spesies_sound);
+        sDistributionText = findViewById(R.id.spesies_distribution);
+        sHabitText = findViewById(R.id.spesies_habit);
+        sFoundedText = findViewById(R.id.spesies_founded);
 
         //set tipycal data
         spesiesName.setText(spesiesModelExtra.getSpesiesName());
-        spesiesLatin.setText(spesiesModelExtra.getSpesiesLatin());
-        spesiesDescription.setText(Html.fromHtml(spesiesModelExtra.getSpesiesDescription()));
+        spesiesLatin.setText("(" + spesiesModelExtra.getSpesiesLatin() + ")");
+        sDescText.setText(Html.fromHtml(spesiesModelExtra.getsDescText()));
+        sSoundText.setText(Html.fromHtml(spesiesModelExtra.getsSoundText()));
+        sDistributionText.setText(Html.fromHtml(spesiesModelExtra.getsDistributionText()));
+        sHabitText.setText(Html.fromHtml(spesiesModelExtra.getsHabitText()));
+        sFoundedText.setText(Html.fromHtml(spesiesModelExtra.getsFoundedText()));
 
         //audio stuff
         seekBar = findViewById(R.id.seekBar);

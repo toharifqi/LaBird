@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -37,6 +38,7 @@ public class QuizGridAdapter extends RecyclerView.Adapter<QuizGridAdapter.MyView
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         final QuizModel quizModelExtra = quizList.get(position);
 
+        holder.cardView.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT));
         holder.quizName.setText(quizList.get(position).getQuizName());
         holder.quizDate.setText(quizList.get(position).getQuizDate());
         holder.cardView.setOnClickListener(new View.OnClickListener() {
@@ -45,6 +47,7 @@ public class QuizGridAdapter extends RecyclerView.Adapter<QuizGridAdapter.MyView
                 //Finish the quiz activity first dude!
             }
         });
+
     }
 
     @Override

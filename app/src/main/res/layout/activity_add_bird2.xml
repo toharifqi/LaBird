@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#E5FFFF"
+    tools:context=".AddBirdActivity2">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:theme="@style/ThemeOverlay.AppCompat.Light">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="17dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:textAlignment="center">
+
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_gravity="center">
+
+                <LinearLayout
+                    android:id="@+id/catBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/littlebox"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="8dp">
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/icon"
+                        android:layout_marginRight="6dp"/>
+
+                    <TextView
+                        android:id="@+id/courseCategory"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="LaBird"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="16sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:elevation="2dp"
+        app:cardCornerRadius="15dp"
+        android:layout_margin="18dp">
+
+        <ImageView
+            android:id="@+id/upload_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:layout_gravity="center"
+            android:src="@drawable/upload_image_placeholder" />
+    </androidx.cardview.widget.CardView>
+
+    <LinearLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/colorPrimary">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:theme="@style/ThemeOverlay.AppCompat.Light">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="16dp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Upload foto burung anda untuk dianalisis"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+        </androidx.appcompat.widget.Toolbar>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+
+        android:background="@drawable/coursetabbg"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/materiContent"
+            android:paddingHorizontal="32dp"
+            android:paddingTop="32dp"
+            android:textAlignment="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/addbird_desclaimer"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+            <Button
+                android:id="@+id/btn_openfolder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" Ambil dari folder"
+                android:background="@drawable/buttonstyle"
+                android:textColor="@color/colorWhite"
+                android:textAllCaps="false"
+                android:padding="8dp"
+                android:drawableLeft="@drawable/ic_baseline_folder"/>
+            <Button
+                android:id="@+id/btn_opencamera"
+                android:layout_marginTop="18dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" Ambil dari kamera"
+                android:background="@drawable/buttonstyle"
+                android:textColor="@color/colorWhite"
+                android:textAllCaps="false"
+                android:padding="8dp"
+                android:drawableLeft="@drawable/ic_photo_camera"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/desclaimer_upload"
+            android:paddingHorizontal="32dp"
+            android:paddingBottom="8dp"
+            android:textAlignment="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Foto yang anda upload akan dikirim ke Anonymous untuk dianalisis, Tekan tombol upload foto di bawah jika sudah yakin!"/>
+
+        <Button
+            android:id="@+id/btn_uploadpic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Upload foto ke Anonymous"
+            android:background="@drawable/greenbuttonstyle"
+            android:textColor="@color/colorWhite"
+            android:textAllCaps="false"
+            android:padding="8dp"
+            android:drawableLeft="@drawable/ic_file_upload"/>
+
+
+    </LinearLayout>
+
+</LinearLayout>

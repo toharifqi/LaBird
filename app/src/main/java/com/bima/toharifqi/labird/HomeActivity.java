@@ -27,6 +27,7 @@ import com.bima.toharifqi.labird.adapter.MateriSnapAdapter;
 import com.bima.toharifqi.labird.adapter.QuizSnapAdapter;
 import com.bima.toharifqi.labird.adapter.SpesiesSnapAdapter;
 import com.bima.toharifqi.labird.helper.GlobalValueUser;
+import com.bima.toharifqi.labird.listener.IFirebaseLoadDone;
 import com.bima.toharifqi.labird.listener.IFirebaseLoadDoneCourse;
 import com.bima.toharifqi.labird.listener.IFirebaseLoadDoneMateri;
 import com.bima.toharifqi.labird.listener.IFirebaseLoadDoneQuiz;
@@ -57,6 +58,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
+
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, IFirebaseLoadDoneMateri, IFirebaseLoadDoneSpesies, IFirebaseLoadDoneCourse, IFirebaseLoadDoneQuiz {
 
     private Toolbar toolbar;
@@ -64,7 +66,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private ImageView menuIcon, dashboardBg;
     private CoordinatorLayout contentView;
     TextView poinText;
-    FloatingActionButton fab;
     RecyclerView recyclerViewMateri, recyclerViewSpesies, recyclerViewCourse, recyclerViewQuiz;
     SnapHelper snapHelper;
     private LinearLayout shimmerMateri, shimmerSpesies, shimmerCourse, shimmerQuiz;
@@ -102,7 +103,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         @Override
         public void onCancelled(@NonNull DatabaseError databaseError) {
-            iFirebaseLoadDoneMateri.onFirebaseLoadFailedMateri(databaseError.getMessage());
+            iFirebaseLoadDoneMateri.onFirebaseLoadFailed(databaseError.getMessage());
         }
     };
 
@@ -118,7 +119,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         @Override
         public void onCancelled(@NonNull DatabaseError databaseError) {
-            iFirebaseLoadDoneSpesies.onFirebaseLoadFailedSpesies(databaseError.getMessage());
+            iFirebaseLoadDoneSpesies.onFirebaseLoadFailed(databaseError.getMessage());
         }
     };
 
@@ -133,7 +134,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         @Override
         public void onCancelled(@NonNull DatabaseError databaseError) {
-            iFirebaseLoadDoneCourse.onFirebaseLoadFailedCourse(databaseError.getMessage());
+            iFirebaseLoadDoneCourse.onFirebaseLoadFailed(databaseError.getMessage());
         }
     };
 
@@ -148,7 +149,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         @Override
         public void onCancelled(@NonNull DatabaseError databaseError) {
-            iFirebaseLoadDoneQuiz.onFirebaseLoadFailedQuiz(databaseError.getMessage());
+            iFirebaseLoadDoneQuiz.onFirebaseLoadFailed(databaseError.getMessage());
         }
     };
 
@@ -212,7 +213,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         poinText = findViewById(R.id.pointText);
         final TextView levelText = findViewById(R.id.levelText);
         final TextView targetPoinText = findViewById(R.id.target_poin);
-        fab = findViewById(R.id.fab);
         recyclerViewMateri = findViewById(R.id.recyclerview_materi);
         recyclerViewSpesies = findViewById(R.id.recyclerview_spesies);
         recyclerViewCourse = findViewById(R.id.recyclerview_course);
@@ -442,21 +442,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    public void onFirebaseLoadFailedMateri(String message) {
-        Toast.makeText(HomeActivity.this, ""+message, Toast.LENGTH_SHORT).show();
-        shimmerMateri.setVisibility(View.GONE);
-    }
-
-    @Override
     public void onFirebaseLoadSuccessSpesies(List<SpesiesModel> spesiesList) {
         spesiesAdapter = new SpesiesSnapAdapter(spesiesList, HomeActivity.this);
         recyclerViewSpesies.setAdapter(spesiesAdapter);
-        shimmerSpesies.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void onFirebaseLoadFailedSpesies(String message) {
-        Toast.makeText(HomeActivity.this, ""+message, Toast.LENGTH_SHORT).show();
         shimmerSpesies.setVisibility(View.GONE);
     }
 
@@ -468,12 +456,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    public void onFirebaseLoadFailedCourse(String message) {
-        Toast.makeText(HomeActivity.this, ""+message, Toast.LENGTH_SHORT).show();
-        shimmerCourse.setVisibility(View.GONE);
-    }
-
-    @Override
     public void onFirebaseLoadSuccessQuiz(List<QuizModel> quizList) {
         quizAdapter = new QuizSnapAdapter(quizList, HomeActivity.this);
         recyclerViewQuiz.setAdapter(quizAdapter);
@@ -481,8 +463,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    public void onFirebaseLoadFailedQuiz(String message) {
+    public void onFirebaseLoadFailed(String message) {
         Toast.makeText(HomeActivity.this, ""+message, Toast.LENGTH_SHORT).show();
+        shimmerMateri.setVisibility(View.GONE);
+        shimmerSpesies.setVisibility(View.GONE);
+        shimmerCourse.setVisibility(View.GONE);
         shimmerQuiz.setVisibility(View.GONE);
     }
 }

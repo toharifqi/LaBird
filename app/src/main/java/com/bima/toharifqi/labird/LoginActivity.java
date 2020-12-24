@@ -30,13 +30,13 @@ import com.google.firebase.database.ValueEventListener;
 import dmax.dialog.SpotsDialog;
 
 public class LoginActivity extends AppCompatActivity {
-    Button buttonTwo;
+    Button registerBtn;
     AlertDialog dialog;
     TextInputLayout email;
     FirebaseAuth fAuth;
     ImageView logoImage;
     TextView logoName;
-    Button masukButton;
+    Button loginBtn;
     TextInputLayout password;
     TextView sloganName;
 
@@ -55,8 +55,8 @@ public class LoginActivity extends AppCompatActivity {
         sloganName = findViewById(R.id.slogan_name);
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
-        masukButton = findViewById(R.id.masukButton);
-        buttonTwo = findViewById(R.id.buttonTwo);
+        loginBtn = findViewById(R.id.masukButton);
+        registerBtn = findViewById(R.id.buttonTwo);
 
         FirebaseAuth instance = FirebaseAuth.getInstance();
         this.fAuth = instance;
@@ -71,13 +71,18 @@ public class LoginActivity extends AppCompatActivity {
         this.dialog.show();
         checkUser.addValueEventListener(new ValueEventListener() {
             public void onDataChange(DataSnapshot dataSnapshot) {
-                GlobalValueUser.nama = (String) dataSnapshot.child(LoginActivity.this.fAuth.getCurrentUser().getUid()).child("nama").getValue(String.class);
-                GlobalValueUser.email = (String) dataSnapshot.child(LoginActivity.this.fAuth.getCurrentUser().getUid()).child("email").getValue(String.class);
-                GlobalValueUser.userName = (String) dataSnapshot.child(LoginActivity.this.fAuth.getCurrentUser().getUid()).child("userName").getValue(String.class);
-                GlobalValueUser.waNumber = (String) dataSnapshot.child(LoginActivity.this.fAuth.getCurrentUser().getUid()).child("waNumber").getValue(String.class);
+                GlobalValueUser.nama = (String) dataSnapshot.child(uid).child("nama").getValue(String.class);
+                GlobalValueUser.email = (String) dataSnapshot.child(uid).child("email").getValue(String.class);
+                GlobalValueUser.userName = (String) dataSnapshot.child(uid).child("userName").getValue(String.class);
+                GlobalValueUser.waNumber = (String) dataSnapshot.child(uid).child("waNumber").getValue(String.class);
                 GlobalValueUser.uId = uid;
                 LoginActivity.this.dialog.dismiss();
-                LoginActivity.this.startActivity(new Intent(LoginActivity.this, BoardingActivity.class));
+
+                if (dataSnapshot.child(uid).child("firstTime").exists()){
+                    LoginActivity.this.startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                }else {
+                    LoginActivity.this.startActivity(new Intent(LoginActivity.this, BoardingActivity.class));
+                }
                 LoginActivity.this.finish();
             }
 
@@ -88,7 +93,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private Boolean validateEmail() {
         if (this.email.getEditText().getText().toString().isEmpty()) {
-            this.email.setError("Username tidak boleh kosong");
+            this.email.setError("Username tidak boleh kosong!");
             return false;
         }
         this.email.setError(null);
@@ -99,7 +104,7 @@ public class LoginActivity extends AppCompatActivity {
     private Boolean validatePassword() {
         String val = password.getEditText().getText().toString();
         if (val.isEmpty()) {
-            password.setError("Password tidak boleh kosong");
+            password.setError("Password tidak boleh kosong!");
             return false;
         } else {
             password.setError(null);
@@ -107,9 +112,6 @@ public class LoginActivity extends AppCompatActivity {
             return true;
         }
     }
-
-
-
 
     public void login(View view){
         if (!validateEmail() | !validatePassword()) {
@@ -135,7 +137,6 @@ public class LoginActivity extends AppCompatActivity {
     /* access modifiers changed from: private */
     public void onSignInSuccess(FirebaseUser user) {
         setGlobalValueUser(user.getUid());
-        startActivity(new Intent(this, BoardingActivity.class));
         finish();
     }
 
@@ -147,8 +148,8 @@ public class LoginActivity extends AppCompatActivity {
                 new Pair(this.sloganName, "slogan_trans"),
                 new Pair(this.email, "email_trans"),
                 new Pair(this.password, "password_trans"),
-                new Pair(this.masukButton, "button_trans"),
-                new Pair(this.buttonTwo, "button2_trans")};
+                new Pair(this.loginBtn, "button_trans"),
+                new Pair(this.registerBtn, "button2_trans")};
         if (Build.VERSION.SDK_INT >= 21) {
             startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this, pairs).toBundle());
         }

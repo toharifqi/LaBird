@@ -16,12 +16,24 @@
         android:layout_height="match_parent"
         >
 
-        <ImageView
-            android:id="@+id/spesies_img_id"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:scaleType="centerCrop"
-            android:background="#2d2d2d" />
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/spesies_img_id"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:scaleType="centerCrop"
+                android:background="@color/colorPrimary" />
+            <ProgressBar
+                android:id="@+id/progressbar_pic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:indeterminateTint="@color/brown"
+                android:indeterminateTintMode="src_in"
+                android:layout_margin="20dp" />
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/spesies_name_id"
@@ -29,7 +41,7 @@
             android:layout_height="match_parent"
             android:background="@color/colorPrimary"
             android:gravity="center"
-            android:text="Spesies Name"
+            android:text="Loading..."
             android:textColor="@color/colorWhite"
             android:textSize="14sp" />
 

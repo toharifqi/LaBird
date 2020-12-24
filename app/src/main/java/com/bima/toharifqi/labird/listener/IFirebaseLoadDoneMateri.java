@@ -5,8 +5,7 @@ import com.bima.toharifqi.labird.model.MateriModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public interface IFirebaseLoadDoneMateri {
+public interface IFirebaseLoadDoneMateri extends IFirebaseLoadDone{
     void onFirebaseLoadSuccessMateri(ArrayList<MateriModel> materiList);
-    void onFirebaseLoadFailedMateri(String message);
 
 }

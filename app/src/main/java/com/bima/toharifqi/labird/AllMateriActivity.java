@@ -43,7 +43,7 @@ public class AllMateriActivity extends AppCompatActivity implements IFirebaseLoa
 
         @Override
         public void onCancelled(@NonNull DatabaseError databaseError) {
-            iFirebaseLoadDone.onFirebaseLoadFailedMateri(databaseError.getMessage());
+            iFirebaseLoadDone.onFirebaseLoadFailed(databaseError.getMessage());
         }
     };
 
@@ -95,7 +95,7 @@ public class AllMateriActivity extends AppCompatActivity implements IFirebaseLoa
     }
 
     @Override
-    public void onFirebaseLoadFailedMateri(String message) {
+    public void onFirebaseLoadFailed(String message) {
         Toast.makeText(AllMateriActivity.this, ""+message, Toast.LENGTH_SHORT).show();
         dialog.dismiss();
     }
@@ -109,7 +109,6 @@ public class AllMateriActivity extends AppCompatActivity implements IFirebaseLoa
     @Override
     public void onResume() {
         super.onResume();
-        query.addValueEventListener(valueEventListener);
     }
 
     @Override
@@ -117,4 +116,6 @@ public class AllMateriActivity extends AppCompatActivity implements IFirebaseLoa
         query.removeEventListener(valueEventListener);
         super.onStop();
     }
+
+
 }

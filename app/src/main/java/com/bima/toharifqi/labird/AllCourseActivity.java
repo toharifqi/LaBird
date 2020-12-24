@@ -44,7 +44,7 @@ public class AllCourseActivity extends AppCompatActivity implements IFirebaseLoa
 
         @Override
         public void onCancelled(@NonNull DatabaseError databaseError) {
-            iFirebaseLoadDone.onFirebaseLoadFailedCourse(databaseError.getMessage());
+            iFirebaseLoadDone.onFirebaseLoadFailed(databaseError.getMessage());
         }
     };
 
@@ -97,7 +97,7 @@ public class AllCourseActivity extends AppCompatActivity implements IFirebaseLoa
     }
 
     @Override
-    public void onFirebaseLoadFailedCourse(String message) {
+    public void onFirebaseLoadFailed(String message) {
         Toast.makeText(AllCourseActivity.this, ""+message, Toast.LENGTH_SHORT).show();
         dialog.dismiss();
     }
@@ -111,7 +111,7 @@ public class AllCourseActivity extends AppCompatActivity implements IFirebaseLoa
     @Override
     public void onResume() {
         super.onResume();
-        query.addValueEventListener(valueEventListener);
+
     }
 
     @Override

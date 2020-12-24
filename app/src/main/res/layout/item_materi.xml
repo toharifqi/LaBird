@@ -8,6 +8,7 @@
     android:focusable="true"
     android:foreground="?android:attr/selectableItemBackground"
     app:cardCornerRadius="8dp"
+    android:id="@+id/cardview_materi"
     app:cardUseCompatPadding="true">
     <RelativeLayout
         android:layout_width="match_parent"

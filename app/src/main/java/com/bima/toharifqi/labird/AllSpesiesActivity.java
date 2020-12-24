@@ -44,7 +44,7 @@ public class AllSpesiesActivity extends AppCompatActivity implements IFirebaseLo
 
         @Override
         public void onCancelled(@NonNull DatabaseError databaseError) {
-            iFirebaseLoadDone.onFirebaseLoadFailedSpesies(databaseError.getMessage());
+            iFirebaseLoadDone.onFirebaseLoadFailed(databaseError.getMessage());
         }
     };
 
@@ -126,7 +126,7 @@ public class AllSpesiesActivity extends AppCompatActivity implements IFirebaseLo
     }
 
     @Override
-    public void onFirebaseLoadFailedSpesies(String message) {
+    public void onFirebaseLoadFailed(String message) {
         Toast.makeText(AllSpesiesActivity.this, ""+message, Toast.LENGTH_SHORT).show();
         dialog.dismiss();
     }
@@ -140,7 +140,6 @@ public class AllSpesiesActivity extends AppCompatActivity implements IFirebaseLo
     @Override
     public void onResume() {
         super.onResume();
-        query.addValueEventListener(valueEventListener);
     }
 
     @Override

@@ -92,12 +92,14 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:paddingVertical="8dp"
                         android:orientation="vertical">
+
                         <TextView
                             android:id="@+id/spesiesName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Section 1: Introduction and Outline"
+                            android:text="Cipoh Kacat"
                             android:textColor="@color/colorWhite"
                             android:textSize="18sp"
                             android:textStyle="bold" />
@@ -105,7 +107,16 @@
                             android:id="@+id/spesiesLatin"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Section 1: Introduction and Outline"
+                            android:text="Aegithina Tiphia"
+                            android:textColor="@color/colorWhite"
+                            android:textStyle="italic|bold"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/spesiesUploader"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="diupload oleh: Admin"
                             android:textColor="@color/colorWhite"
                             android:textStyle="italic"
                             android:textSize="16sp" />
@@ -119,6 +130,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center_horizontal"
+                android:padding="16dp"
                 android:background="@drawable/coursetabbg"
                 android:orientation="vertical">
                 <TextView
@@ -140,14 +152,66 @@
                     android:src="@drawable/ic_play_arrow"
                     android:background="@color/colorWhite"/>
 
-
-
                 <TextView
-                    android:id="@+id/spesiesDescription"
-                    android:padding="16dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="afadsfasfafa"/>
+                    android:text="Deskripsi:"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/spesies_desc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="Species description"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Suara:"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/spesies_sound"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="Species description"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Penyebaran Lokal dan Status:"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/spesies_distribution"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="Species description"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Kebiasaan:"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/spesies_habit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="Species description"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Tempat ditemukan:"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/spesies_founded"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="Species description"/>
 
 
             </LinearLayout>

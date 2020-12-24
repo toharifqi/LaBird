@@ -4,7 +4,6 @@ import com.bima.toharifqi.labird.model.LeaderBoardModel;
 
 import java.util.List;
 
-public interface IFirebaseLoadDoneBoard {
+public interface IFirebaseLoadDoneBoard extends IFirebaseLoadDone {
     void onFirebaseLoadSuccess(List<LeaderBoardModel> boardList);
-    void onFirebaseLoadFailed(String message);
 }

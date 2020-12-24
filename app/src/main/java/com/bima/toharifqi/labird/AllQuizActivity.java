@@ -42,7 +42,7 @@ public class AllQuizActivity extends AppCompatActivity implements IFirebaseLoadD
 
         @Override
         public void onCancelled(@NonNull DatabaseError databaseError) {
-            iFirebaseLoadDone.onFirebaseLoadFailedQuiz(databaseError.getMessage());
+            iFirebaseLoadDone.onFirebaseLoadFailed(databaseError.getMessage());
         }
     };
 
@@ -94,7 +94,7 @@ public class AllQuizActivity extends AppCompatActivity implements IFirebaseLoadD
     }
 
     @Override
-    public void onFirebaseLoadFailedQuiz(String message) {
+    public void onFirebaseLoadFailed(String message) {
         Toast.makeText(AllQuizActivity.this, ""+message, Toast.LENGTH_SHORT).show();
         dialog.dismiss();
     }
@@ -108,7 +108,6 @@ public class AllQuizActivity extends AppCompatActivity implements IFirebaseLoadD
     @Override
     public void onResume() {
         super.onResume();
-        query.addValueEventListener(valueEventListener);
     }
 
     @Override
