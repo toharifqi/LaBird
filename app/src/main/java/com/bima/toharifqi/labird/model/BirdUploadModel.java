@@ -7,21 +7,23 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class BirdUploadModel implements Parcelable {
-    private String senderId, timeStamp, photoUrl;
+    private String senderId, timeStamp, photoUrl, itemId;
 
     public BirdUploadModel() {
     }
 
-    public BirdUploadModel(String senderId, String timeStamp, String photoUrl) {
+    public BirdUploadModel(String senderId, String timeStamp, String photoUrl, String itemId) {
         this.senderId = senderId;
         this.timeStamp = timeStamp;
         this.photoUrl = photoUrl;
+        this.itemId = itemId;
     }
 
     protected BirdUploadModel(Parcel in) {
         senderId = in.readString();
         timeStamp = in.readString();
         photoUrl = in.readString();
+        itemId = in.readString();
     }
 
     public static final Creator<BirdUploadModel> CREATOR = new Creator<BirdUploadModel>() {
@@ -48,6 +50,10 @@ public class BirdUploadModel implements Parcelable {
         return photoUrl;
     }
 
+    public String getItemId() {
+        return itemId;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -58,6 +64,7 @@ public class BirdUploadModel implements Parcelable {
         parcel.writeString(senderId);
         parcel.writeString(timeStamp);
         parcel.writeString(photoUrl);
+        parcel.writeString(itemId);
     }
 
     public Map<String, Object> addBird() {
@@ -65,6 +72,7 @@ public class BirdUploadModel implements Parcelable {
         result.put("senderId", senderId);
         result.put("timeStamp", timeStamp);
         result.put("photoUrl", photoUrl);
+        result.put("itemId", itemId);
 
         return result;
     }

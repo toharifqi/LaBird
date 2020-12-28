@@ -9,7 +9,9 @@ public class SpesiesModel implements Parcelable {
     public SpesiesModel() {
     }
 
-    public SpesiesModel(String spesiesName, String spesiesLatin, String spesiesImage, String spesiesSound, String spesiesId, String uploadedBy, String sDescText, String sSoundText, String sDistributionText, String sHabitText, String sFoundedText) {
+    public SpesiesModel(String spesiesName, String spesiesLatin, String spesiesImage, String spesiesSound
+            , String spesiesId, String uploadedBy, String sDescText, String sSoundText, String sDistributionText
+            , String sHabitText, String sFoundedText) {
         this.spesiesName = spesiesName;
         this.spesiesLatin = spesiesLatin;
         this.spesiesImage = spesiesImage;

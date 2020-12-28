@@ -112,7 +112,7 @@ public class CourseActivity extends AppCompatActivity implements IFirebaseLoadDo
     }
 
     public void toAllSpecies(View view){
-        Intent intent = new Intent(CourseActivity.this, AllSpesiesActivity.class);
+        Intent intent = new Intent(CourseActivity.this, AllSpeciesActivity.class);
         intent.putExtra("courseName", courseModelExtra.getCourseTitle());
         startActivity(intent);
     }

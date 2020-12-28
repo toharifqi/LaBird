@@ -10,7 +10,6 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -43,7 +42,6 @@ import com.google.firebase.storage.UploadTask;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -223,7 +221,7 @@ public class AddBirdActivity2 extends AppCompatActivity {
         if (isNullPhotoUrl){
             showDialogNoInput();
         }else {
-            final String timeStampString = dateTime.replace(" ", "");
+            final String timeStampId = dateTime.replace(" ", "");
             final String senderId = GlobalValueUser.uId;
 
             storageReference = FirebaseStorage.getInstance().getReference().child("uploadedBird/" + senderId).child(dateTime + "/");
@@ -242,18 +240,18 @@ public class AddBirdActivity2 extends AppCompatActivity {
                     if (task.isSuccessful()){
                         Uri downloadUri = task.getResult();
 
-                        BirdUploadModel birdUploadModel = new BirdUploadModel(senderId, dateTime, downloadUri.toString());
+                        BirdUploadModel birdUploadModel = new BirdUploadModel(senderId, dateTime, downloadUri.toString(), senderId+timeStampId);
                         Map<String, Object> postValues = birdUploadModel.addBird();
                         Map<String, Object> childUpdates = new HashMap<>();
 
-                        childUpdates.put("/birdUploads/" + expertUid + "/" + senderId+timeStampString, postValues);
+                        childUpdates.put("/birdUploads/" + expertUid + "/" + senderId+timeStampId, postValues);
                         mDatabaseReference.updateChildren(childUpdates);
 
                         Toast.makeText(AddBirdActivity2.this, "Photo telah ter upload!", Toast.LENGTH_SHORT).show();
 
                     }
                     dialog.dismiss();
-                    showPoUpDialog();
+                    showPopUpDialog();
                 }
             });
         }
@@ -261,7 +259,7 @@ public class AddBirdActivity2 extends AppCompatActivity {
 
     }
 
-    private void showPoUpDialog() {
+    private void showPopUpDialog() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 
         alertDialogBuilder.setTitle("Foto berhasil terupload!");

@@ -25,7 +25,7 @@ import java.util.List;
 
 import dmax.dialog.SpotsDialog;
 
-public class AllSpesiesActivity extends AppCompatActivity implements IFirebaseLoadDoneSpesies {
+public class AllSpeciesActivity extends AppCompatActivity implements IFirebaseLoadDoneSpesies {
     private RecyclerView spesiesRecyclerView;
     private SpeciesGridAdapter speciesGridAdapter;
 
@@ -53,7 +53,7 @@ public class AllSpesiesActivity extends AppCompatActivity implements IFirebaseLo
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_all_spesies);
+        setContentView(R.layout.activity_all_species);
 
         // Action Bar
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -97,7 +97,7 @@ public class AllSpesiesActivity extends AppCompatActivity implements IFirebaseLo
         iFirebaseLoadDone = this;
 
         //to display loading dialog
-        dialog = new SpotsDialog.Builder().setContext(AllSpesiesActivity.this).build();
+        dialog = new SpotsDialog.Builder().setContext(AllSpeciesActivity.this).build();
         dialog.setMessage("Mohon tunggu...");
 
         loadSpesies();
@@ -120,14 +120,14 @@ public class AllSpesiesActivity extends AppCompatActivity implements IFirebaseLo
 
     @Override
     public void onFirebaseLoadSuccessSpesies(List<SpesiesModel> spesiesList) {
-        speciesGridAdapter = new SpeciesGridAdapter(AllSpesiesActivity.this, spesiesList);
+        speciesGridAdapter = new SpeciesGridAdapter(AllSpeciesActivity.this, spesiesList);
         spesiesRecyclerView.setAdapter(speciesGridAdapter);
         dialog.dismiss();
     }
 
     @Override
     public void onFirebaseLoadFailed(String message) {
-        Toast.makeText(AllSpesiesActivity.this, ""+message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(AllSpeciesActivity.this, ""+message, Toast.LENGTH_SHORT).show();
         dialog.dismiss();
     }
 
@@ -135,11 +135,6 @@ public class AllSpesiesActivity extends AppCompatActivity implements IFirebaseLo
     public void onDestroy() {
         query.removeEventListener(valueEventListener);
         super.onDestroy();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
     }
 
     @Override

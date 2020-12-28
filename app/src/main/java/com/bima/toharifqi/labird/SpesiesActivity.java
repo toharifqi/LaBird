@@ -23,7 +23,7 @@ import java.util.concurrent.TimeUnit;
 import dmax.dialog.SpotsDialog;
 
 public class SpesiesActivity extends AppCompatActivity implements MediaPlayer.OnBufferingUpdateListener, MediaPlayer.OnCompletionListener {
-    private TextView spesiesName, spesiesLatin, sDescText, sSoundText, sDistributionText, sHabitText, sFoundedText;
+    private TextView spesiesName, spesiesLatin, spesiesUploader, sDescText, sSoundText, sDistributionText, sHabitText, sFoundedText;
 
     Toolbar toolbar;
 
@@ -60,6 +60,7 @@ public class SpesiesActivity extends AppCompatActivity implements MediaPlayer.On
         //tipycal views
         spesiesName = findViewById(R.id.spesiesName);
         spesiesLatin = findViewById(R.id.spesiesLatin);
+        spesiesUploader = findViewById(R.id.spesiesUploader);
         sDescText = findViewById(R.id.spesies_desc);
         sSoundText = findViewById(R.id.spesies_sound);
         sDistributionText = findViewById(R.id.spesies_distribution);
@@ -69,6 +70,7 @@ public class SpesiesActivity extends AppCompatActivity implements MediaPlayer.On
         //set tipycal data
         spesiesName.setText(spesiesModelExtra.getSpesiesName());
         spesiesLatin.setText("(" + spesiesModelExtra.getSpesiesLatin() + ")");
+        spesiesUploader.setText("diupload oleh: " + spesiesModelExtra.getUploadedBy());
         sDescText.setText(Html.fromHtml(spesiesModelExtra.getsDescText()));
         sSoundText.setText(Html.fromHtml(spesiesModelExtra.getsSoundText()));
         sDistributionText.setText(Html.fromHtml(spesiesModelExtra.getsDistributionText()));

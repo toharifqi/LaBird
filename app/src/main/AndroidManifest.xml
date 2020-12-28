@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AddBirdActivity"></activity>
+        <activity android:name=".NotificationActivity"></activity>
+        <activity android:name=".AddBirdActivity" />
         <activity android:name=".AddBirdActivity2" />
         <activity android:name=".DailyEvaluationActivity" />
         <activity android:name=".LeaderBoardActivity" />
@@ -29,7 +30,7 @@
         <activity android:name=".SpesiesActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".AllCourseActivity" />
-        <activity android:name=".AllSpesiesActivity" />
+        <activity android:name=".AllSpeciesActivity" />
         <activity android:name=".AllMateriActivity" />
         <activity android:name=".MateriActivity" />
         <activity android:name=".BoardingActivity" />

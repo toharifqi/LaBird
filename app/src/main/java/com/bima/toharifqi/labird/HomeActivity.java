@@ -27,7 +27,6 @@ import com.bima.toharifqi.labird.adapter.MateriSnapAdapter;
 import com.bima.toharifqi.labird.adapter.QuizSnapAdapter;
 import com.bima.toharifqi.labird.adapter.SpesiesSnapAdapter;
 import com.bima.toharifqi.labird.helper.GlobalValueUser;
-import com.bima.toharifqi.labird.listener.IFirebaseLoadDone;
 import com.bima.toharifqi.labird.listener.IFirebaseLoadDoneCourse;
 import com.bima.toharifqi.labird.listener.IFirebaseLoadDoneMateri;
 import com.bima.toharifqi.labird.listener.IFirebaseLoadDoneQuiz;
@@ -39,7 +38,6 @@ import com.bima.toharifqi.labird.model.SpesiesModel;
 import com.bumptech.glide.Glide;
 import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -213,6 +211,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         poinText = findViewById(R.id.pointText);
         final TextView levelText = findViewById(R.id.levelText);
         final TextView targetPoinText = findViewById(R.id.target_poin);
+        final ImageView notifBtn = findViewById(R.id.notif_btn);
         recyclerViewMateri = findViewById(R.id.recyclerview_materi);
         recyclerViewSpesies = findViewById(R.id.recyclerview_spesies);
         recyclerViewCourse = findViewById(R.id.recyclerview_course);
@@ -249,6 +248,22 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 poinText.setText(poinValuePlus+" pts");
                 levelText.setText("level "+levelString);
                 targetPoinText.setText("Target: "+targetPoin+" poin");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        //check if there is any notification
+        DatabaseReference notifDb = FirebaseDatabase.getInstance().getReference("notification");
+        notifDb.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()){
+                    notifBtn.setImageResource(R.drawable.ic_baseline_notifications_active);
+                }
             }
 
             @Override
@@ -388,7 +403,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     }
 
     public void toAllSpecies(View view){
-        startActivity(new Intent(HomeActivity.this, AllSpesiesActivity.class));
+        startActivity(new Intent(HomeActivity.this, AllSpeciesActivity.class));
     }
 
     public void toAllMateri(View view){
@@ -409,6 +424,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     public void toAddBird(View view){
         startActivity(new Intent(HomeActivity.this, AddBirdActivity.class));
+    }
+
+    public void toNotification(View view){
+        startActivity(new Intent(HomeActivity.this, NotificationActivity.class));
     }
 
     @Override

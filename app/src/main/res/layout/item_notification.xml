@@ -19,16 +19,6 @@
         android:layout_height="wrap_content"
         android:padding="8dp">
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="62dp"
-            android:layout_height="62dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_baseline_person"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <TextView
             android:id="@+id/tv_message"
             android:layout_width="wrap_content"
@@ -36,12 +26,25 @@
             android:layout_marginStart="8dp"
             android:ellipsize="end"
             android:gravity="left"
-            android:text="Mr. Anonymous"
+            android:text="Lorem ipsum messages"
             android:textColor="@color/colorGrey"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/tv_expertname"
             app:layout_constraintStart_toEndOf="@+id/imageView"
             app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/tv_timestamp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="0"
+            android:text="Sat 26 12 2020 - 08:24:04 WIB"
+            android:textColor="@color/colorGrey"
+            android:textStyle="italic|bold"
+            app:layout_constraintBottom_toTopOf="@+id/tv_expertname"
+            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintTop_toBottomOf="@+id/tv_message" />
 
         <TextView
             android:id="@+id/tv_expertname"
@@ -49,11 +52,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_weight="0"
-            android:text="anonymous@email.com"
+            android:text="Dari Anonymous"
             android:textColor="@color/colorAccent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toBottomOf="@+id/tv_message" />
+            app:layout_constraintStart_toEndOf="@+id/imageView" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

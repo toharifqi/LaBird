@@ -65,8 +65,8 @@ public class ExpertListAdapter extends RecyclerView.Adapter<ExpertListAdapter.My
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            expertName = itemView.findViewById(R.id.name_expert);
-            expertEmail = itemView.findViewById(R.id.email_expert);
+            expertName = itemView.findViewById(R.id.tv_message);
+            expertEmail = itemView.findViewById(R.id.tv_expertname);
         }
     }
 }
